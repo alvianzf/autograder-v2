@@ -1,36 +1,49 @@
 name: Unit Test and Update Google Sheet
 
 on:
-    push:
-      branches: [ submission ]
+  push:
+    branches: [ submission ]
 
 jobs:
   test:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-    - name: Setup Node.js environment
-      uses: actions/setup-node@v2.4.0
-      with:
-        node-version: '14.x'
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2.4.0
+        with:
+          node-version: '14.x'
 
-    - name: Install dependencies
-      run: |
-        npm install google-spreadsheet moment-timezone https cheerio jsdom mocha
+      - name: Install dependencies
+        run: |
+          npm install google-spreadsheet moment-timezone https cheerio jsdom mocha
 
-    - name: Test project
-      run: node ./.github/tests/test.js
-    
-    - name: Update Google Sheet
-      if: success()
-      env:
-        GOOGLE_SHEETS_EMAIL: ${{ secrets.GOOGLE_SHEETS_EMAIL }}
-        GOOGLE_SHEETS_PRIVATE_KEY: ${{ secrets.GOOGLE_SHEETS_PRIVATE_KEY }}
-        GITHUB_ACTOR: ${{ github.actor }}
-        GITHUB_EMAIL: ${{ github.event.head_commit.author.email }}
-        TEST_CASES_PASSED: ${{ env.TEST_CASES_PASSED }}
-      run: |
-        node -e "console.log(process.env.TEST_CASES_PASSED)"
-        node ./.github/workflows/update-sheet.js
+      - name: Test project
+        id: test
+        run: node ./.github/tests/test.js
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_EMAIL: ${{ github.event.head_commit.author.email }}
+
+      - name: Set test cases passed output
+        run: echo "::set-output name=test_cases_passed::${{ env.TEST_CASES_PASSED }}"
+
+  update-sheet:
+    needs: test
+    if: success()
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Update Google Sheet
+        env:
+          GOOGLE_SHEETS_EMAIL: ${{ secrets.GOOGLE_SHEETS_EMAIL }}
+          GOOGLE_SHEETS_PRIVATE_KEY: ${{ secrets.GOOGLE_SHEETS_PRIVATE_KEY }}
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_EMAIL: ${{ github.event.head_commit.author.email }}
+          TEST_CASES_PASSED: ${{ needs.test.outputs.TEST_CASES_PASSED }}
+        run: node -e "console.log(process.env.TEST_CASES_PASSED)"
+             node ./.github/workflows/update-sheet.js
+
+              
