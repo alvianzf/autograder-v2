@@ -1,4 +1,4 @@
-const http = require('http');
+const http = require('https');
 const cheerio = require('cheerio');
 
 const url = `https://${process.env.GITHUB_ACTOR}.github.io`; // Replace with the URL of the page you want to test
