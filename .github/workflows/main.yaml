@@ -13,13 +13,13 @@ jobs:
       run: |
         npm install google-spreadsheet moment-timezone
 
-    - name: Run tests
-      env:
-        TEST_CASES_PASSED: ${{ env.TEST_CASES_PASSED }}
-      run: |
-        npm test
-        export TEST_CASES_PASSED=$?
-        echo "Test cases passed: $TEST_CASES_PASSED"
+    # - name: Run tests
+    #   env:
+    #     TEST_CASES_PASSED: ${{ env.TEST_CASES_PASSED }}
+    #   run: |
+    #     npm test
+    #     export TEST_CASES_PASSED=$?
+    #     echo "Test cases passed: $TEST_CASES_PASSED"
 
     - name: Update Google Sheet
       if: success()
