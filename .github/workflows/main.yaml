@@ -31,4 +31,4 @@ jobs:
         TEST_CASES_PASSED: ${{ env.TEST_CASES_PASSED }}
       run: |
         node -e "console.log(process.env.TEST_CASES_PASSED)"
-        node ./github/workflows/update-sheet.js
+        node ./.github/workflows/update-sheet.js
