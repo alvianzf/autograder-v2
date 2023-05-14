@@ -21,7 +21,7 @@ jobs:
         npm install google-spreadsheet moment-timezone https cheerio jsdom mocha
 
     - name: Test project
-      run: node ./.github/workflows/test.js
+      run: node ./.github/tests/test.js
     
     - name: Update Google Sheet
       if: success()

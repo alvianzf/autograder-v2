@@ -1,6 +1,5 @@
 const http = require('https');
 const cheerio = require('cheerio');
-const updateSheet = require('./github/workflows/update-sheet.js');
 
 const url = `https://${process.env.GITHUB_ACTOR}.github.io`; // Replace with the URL of the page you want to test
 
@@ -29,8 +28,8 @@ http.get(url, (res) => {
       testCasesPassed++;
     }
     process.env.TEST_CASES_PASSED = testCasesPassed;
-    updateSheet(testCasesPassed);
-    console.log(`Test cases passed: ${testCasesPassed}`);
+    // console.log(`Test cases passed: ${testCasesPassed}`);
+    console.log(`Test cases passed: ${process.env.TEST_CASES_PASSED}`);
   });
 }).on('error', (err) => {
   console.error(`Error: ${err.message}`);
