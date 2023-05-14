@@ -1,6 +1,6 @@
 const http = require('https');
 const cheerio = require('cheerio');
-include('../workflows/update-sheet/js');
+const updateSheet = require('../workflows/update-sheet/js');
 
 const url = `https://${process.env.GITHUB_ACTOR}.github.io`; // Replace with the URL of the page you want to test
 
