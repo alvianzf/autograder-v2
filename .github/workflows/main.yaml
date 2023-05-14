@@ -8,6 +8,9 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    outputs:
+        test_cases_passed: ${{ steps.test.outputs.test_cases_passed }}
+
     steps:
       - uses: actions/checkout@v2
 
