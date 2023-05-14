@@ -15,6 +15,7 @@ async function updateSheet() {
   const row = await sheet.addRow({
     Username: process.env.GITHUB_ACTOR,
     Email: process.env.GITHUB_EMAIL,
+    'Repository URL': `https://github.com/${process.env.GITHUB_REPOSITORY}`,
     'Successful Test Cases': parseInt(process.env.TEST_CASES_PASSED),
     'Date and Time (GMT+7)': moment().tz('Asia/Jakarta').format(),
   });
