@@ -28,6 +28,7 @@ http.get(url, (res) => {
       testCasesPassed++;
     }
     process.env.TEST_CASES_PASSED = testCasesPassed;
+    updateSheet(testCasesPassed);
     console.log(`Test cases passed: ${testCasesPassed}`);
   });
 }).on('error', (err) => {
