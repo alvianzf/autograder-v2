@@ -23,7 +23,7 @@ jobs:
         npm install jsdom mocha
 
     - name: Test project
-      run: ./github/tests/test.js
+      run: ./.github/tests/test.js
     
     - name: Update Google Sheet
       if: success()
