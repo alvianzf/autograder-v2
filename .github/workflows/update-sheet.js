@@ -13,7 +13,7 @@ async function updateSheet() {
   const dateFormatted = currentDate.format('DD-MM-YYYY');
   
   // Format the time as H:i:s
-  const timeFormatted = currentDate.format('H:i:s');
+  const timeFormatted = currentDate.format('H:m:s');
   
   await doc.loadInfo();
 
