@@ -12,7 +12,7 @@ async function updateSheet() {
   // Format the date as DD-MM-YYYY
   const dateFormatted = currentDate.format('DD-MM-YYYY');
   
-  // Format the time as H:i:s
+  // Format the time as H:m:s
   const timeFormatted = currentDate.format('H:m:s');
   
   await doc.loadInfo();
@@ -23,7 +23,6 @@ async function updateSheet() {
     Email: process.env.GITHUB_EMAIL,
     'Repository URL': `https://github.com/${process.env.GITHUB_REPOSITORY}`,
     'Successful Test Cases': parseInt(process.env.TEST_CASES_PASSED),
-    // 'Date and Time (GMT+7)': moment().tz('Asia/Jakarta').format(),
     'Deployment address': `https://${process.env.GITHUB_ACTOR}.github.io`,
     'Date': dateFormatted,
     'Time': timeFormatted
