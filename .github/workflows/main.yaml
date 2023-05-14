@@ -23,7 +23,7 @@ jobs:
     - name: Test project
       run: |
         export TEST_CASES_PASSED=$(node ./.github/tests/test.js)
-        echo "Test cases passed: $TEST_CASES_PASSED"
+        echo "$TEST_CASES_PASSED"
         echo $TEST_CASES_PASSED > test-cases-passed.txt
 
     - name: Update Google Sheet

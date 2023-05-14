@@ -28,8 +28,7 @@ http.get(url, (res) => {
       testCasesPassed++;
     }
     process.env.TEST_CASES_PASSED = testCasesPassed;
-    // console.log(`Test cases passed: ${testCasesPassed}`);
-    console.log(`Test cases passed: ${process.env.TEST_CASES_PASSED}`);
+    console.log(`${testCasesPassed}`);
   });
 }).on('error', (err) => {
   console.error(`Error: ${err.message}`);
