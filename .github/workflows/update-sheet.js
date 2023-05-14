@@ -1,8 +1,6 @@
 const { GoogleSpreadsheet } = require('google-spreadsheet');
 const moment = require('moment-timezone');
 
-console.log(process.env)
-
 async function updateSheet() {
   const doc = new GoogleSpreadsheet('<SPREADSHEET_ID>');
   await doc.useServiceAccountAuth({
