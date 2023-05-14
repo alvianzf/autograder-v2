@@ -18,12 +18,10 @@ jobs:
 
     - name: Install dependencies
       run: |
-        npm install google-spreadsheet moment-timezone
-        npm install http cheerio
-        npm install jsdom mocha
+        npm install google-spreadsheet moment-timezone http cheerio jsdom mocha
 
     - name: Test project
-      run: ./.github/tests/test.js
+      run: node ./.github/tests/test.js
     
     - name: Update Google Sheet
       if: success()
