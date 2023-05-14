@@ -24,6 +24,7 @@ async function updateSheet() {
     'Repository URL': `https://github.com/${process.env.GITHUB_REPOSITORY}`,
     'Successful Test Cases': parseInt(process.env.TEST_CASES_PASSED),
     // 'Date and Time (GMT+7)': moment().tz('Asia/Jakarta').format(),
+    'Deplyoment address': `https://${uprocess.env.GITHUB_EMAIL}.github.io`,
     'Date': dateFormatted,
     'Time': timeFormatted
   });
