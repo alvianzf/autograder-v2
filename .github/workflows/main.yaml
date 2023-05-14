@@ -1,0 +1,34 @@
+name: Unit Test and Update Google Sheet
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Install dependencies
+      run: |
+        npm install google-spreadsheet moment-timezone
+
+    - name: Run tests
+      env:
+        TEST_CASES_PASSED: ${{ env.TEST_CASES_PASSED }}
+      run: |
+        npm test
+        export TEST_CASES_PASSED=$?
+        echo "Test cases passed: $TEST_CASES_PASSED"
+
+    - name: Update Google Sheet
+      if: success()
+      env:
+        GOOGLE_SHEETS_EMAIL: ${{ secrets.GOOGLE_SHEETS_EMAIL }}
+        GOOGLE_SHEETS_PRIVATE_KEY: ${{ secrets.GOOGLE_SHEETS_PRIVATE_KEY }}
+        GITHUB_ACTOR: ${{ github.actor }}
+        GITHUB_EMAIL: ${{ github.event.head_commit.author.email }}
+        TEST_CASES_PASSED: ${{ env.TEST_CASES_PASSED }}
+      run: |
+        node -e "console.log(process.env.TEST_CASES_PASSED)"
+        node update-sheet.js
