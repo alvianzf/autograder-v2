@@ -15,16 +15,9 @@ http.get(url, (res) => {
     const script = $('script');
     const link = $('link');
     let testCasesPassed = 0;
-    if (head.length > 0) {
-      testCasesPassed++;
-    }
-    if (body.length > 0) {
-      testCasesPassed++;
-    }
-    if (script.length > 0) {
-      testCasesPassed++;
-    }
-    if (link.length > 0) {
+
+//  Test if the html page has the required element tag
+    if (head.length > 0 && body.length > 0 && script.length > 0 && link.length > 0) {
       testCasesPassed++;
     }
     process.env.TEST_CASES_PASSED = testCasesPassed;
