@@ -10,7 +10,6 @@ async function updateSheet() {
 
   await doc.loadInfo();
 
-//   const sheet = doc.sheetsById['1S_51UI9RW3s5rB13TXlppAjabUDZouGM4ERFz_e-1v4'];
   const sheet = doc.sheetsByTitle['Sheet1'];
   const row = await sheet.addRow({
     Username: process.env.GITHUB_ACTOR,
