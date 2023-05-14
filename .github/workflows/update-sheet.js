@@ -7,9 +7,11 @@ async function updateSheet() {
     client_email: process.env.GOOGLE_SHEETS_EMAIL,
     private_key: process.env.GOOGLE_SHEETS_PRIVATE_KEY.replace(/\\n/g, '\n'),
   });
-  
+
   await doc.loadInfo();
-  const sheet = doc.sheetsById['1S_51UI9RW3s5rB13TXlppAjabUDZouGM4ERFz_e-1v4'];
+
+//   const sheet = doc.sheetsById['1S_51UI9RW3s5rB13TXlppAjabUDZouGM4ERFz_e-1v4'];
+  const sheet = doc.sheetsByTitle['Sheet1'];
   const row = await sheet.addRow({
     Username: process.env.GITHUB_ACTOR,
     Email: process.env.GITHUB_EMAIL,
