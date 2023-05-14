@@ -22,7 +22,8 @@ async function updateSheet() {
     Username: process.env.GITHUB_ACTOR,
     Email: process.env.GITHUB_EMAIL,
     'Repository URL': `https://github.com/${process.env.GITHUB_REPOSITORY}`,
-    'Successful Test Cases': parseInt(process.env.TEST_CASES_PASSED),
+    // 'Successful Test Cases': parseInt(process.env.TEST_CASES_PASSED),
+    'Successful Test Cases': process.env.TEST_CASES_PASSED,
     'Deployment address': `https://${process.env.GITHUB_ACTOR}.github.io`,
     'Date': dateFormatted,
     'Time': timeFormatted
