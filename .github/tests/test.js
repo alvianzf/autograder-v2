@@ -12,6 +12,7 @@ function testElements($) {
       testCasesPassed++;
     }
   });
+
   process.env.TEST_CASES_PASSED = testCasesPassed;
   console.log(`${testCasesPassed}`);
 }
