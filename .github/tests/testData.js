@@ -75,7 +75,6 @@ module.exports = [
         return circumference === 20; // Assuming the expected circumference is 20
       }
     },
-  
     // Test case for sisi-luas input form
     {
       name: 'sisi-luas',
