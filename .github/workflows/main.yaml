@@ -3,6 +3,9 @@ name: Unit Test and Update Google Sheet
 on:
   schedule:
     - cron: '0 0 1 6 * 2023'
+  push:
+    branches:
+      - main
 
 jobs:
   test:
