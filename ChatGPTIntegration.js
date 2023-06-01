@@ -2,46 +2,56 @@ const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
 
-const API_URL = 'https://api.openai.com/v1/chat/completions';
-const API_KEY = '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';
+const gptUrl = "https://api.openai.com/v1/completions";
+const gptKey = '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';
+const gptMachine = "text-davinci-003"
 
-async function rateJSWithChatGPT() {
-    try {
-        const scriptCode = await getCodeAsString();
-        if (scriptCode) {
-            const prompt = `You: Please rate my script:\n\`\`\`javascript\n${scriptCode}\n\`\`\``;
-            const payload = {
-                messages: [{ role: 'system', content: prompt }],
-            };
+const client = axios.create({
+  headers: {
+    Authorization: "Bearer " + gptKey,
+  },
+});
 
-            const response = await axios.post(API_URL, payload, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${API_KEY}`,
-                },
-            });
+async function sendToGPT() {
+  const prompt = "please rate my javascript code from 1-10 " + getCodeAsString();
+    console.log(prompt)
+  const result = await generateChatResponseWith(prompt);
 
-            const chatGPTResult = response.data.choices[0].message.content;
-            console.log(`ChatGPT: ${chatGPTResult}`);
-        }
-    } catch (error) {
-        console.error('Error:', error.message);
-    }
+  if (result) {
+    console.log(result);
+  } else {
+    console.log('Failed to receive a response.');
+  }
 }
+
+async function generateChatResponseWith(message) {
+    try {
+      const params = {
+        prompt: message,
+        model: gptMachine,
+        max_tokens: 10,
+        temperature: 0,
+      };
+  
+      const response = await client.post(gptUrl, params);
+  
+      return response.data.choices[0].text;
+    } catch (error) {
+      console.log('Error:', error.message);
+      return null;
+    }
+  }
 
 function getCodeAsString() {
     const filePath = path.join(__dirname, 'script.js');
-
-    return new Promise((resolve, reject) => {
-        fs.readFile(filePath, 'utf8', (error, data) => {
-            if (error) {
-                console.error('Error reading file:', error.message);
-                reject(error);
-            } else {
-                resolve(data);
-            }
-        });
-    });
+    try {
+        const data = fs.readFileSync(filePath, 'utf8');
+        return data;
+    } catch (error) {
+        console.error('Error reading file:', error.message);
+        return null;
+    }
 }
 
-rateJSWithChatGPT();
+sendToGPT();
+ 
