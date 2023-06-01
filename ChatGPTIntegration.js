@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 
 const gptUrl = "https://api.openai.com/v1/completions";
-const gptKey = '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';
+const gptKey = '';
 const gptMachine = "text-davinci-003"
 
 const client = axios.create({
